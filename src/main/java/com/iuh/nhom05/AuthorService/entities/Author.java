@@ -5,12 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.*;
+
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Table(name = "author")
 public class Author {
-    private String id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
     private String firstName;
     private String lastName;
     private String dateOfBirth;
