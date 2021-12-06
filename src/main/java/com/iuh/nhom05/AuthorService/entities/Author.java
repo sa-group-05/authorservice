@@ -1,21 +1,20 @@
 package com.iuh.nhom05.AuthorService.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
+//import javax.persistence.*;
+
+//@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name = "author")
-public class Author {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//@Table(name = "author")
+public class Author implements Serializable {
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
