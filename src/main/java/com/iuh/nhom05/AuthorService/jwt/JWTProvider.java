@@ -11,7 +11,7 @@ import java.util.Date;
 @Slf4j
 public class JWTProvider {
     private final String SECRET_KEY = "I have no secret";
-    private final long EXPIRE_TIME = 24 * 60 * 60; //1 day
+    private final long EXPIRE_TIME = 24 * 60 * 60 * 1000; //1 day
 
     public String generateToken(MyUserDetail userDetails) {
         Date now = new Date();
