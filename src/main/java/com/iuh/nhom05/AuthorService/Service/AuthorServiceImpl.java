@@ -2,6 +2,7 @@ package com.iuh.nhom05.AuthorService.Service;
 
 import com.iuh.nhom05.AuthorService.entities.Author;
 import com.iuh.nhom05.AuthorService.repository.AuthorRepository;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class AuthorServiceImpl implements AuthorService{
         return authorRepository.findAll();
     }
 
+    @RateLimiter(name = "basic")
     @Override
     public Author findById(int id) {
         Optional<Author> rs = authorRepository.findById(id);
@@ -28,6 +30,7 @@ public class AuthorServiceImpl implements AuthorService{
         return author;
     }
 
+    @RateLimiter(name = "timeout")
     @Override
     public void save(Author author) {
         authorRepository.save(author);
