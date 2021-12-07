@@ -2,6 +2,7 @@ package com.iuh.nhom05.AuthorService.Service;
 
 import com.iuh.nhom05.AuthorService.entities.Author;
 import com.iuh.nhom05.AuthorService.repository.AuthorRepository;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public class AuthorServiceImpl implements AuthorService{
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Retry(name = "basic")
     @Override
     public List<Author> findAll() {
         return authorRepository.findAll();
@@ -28,6 +30,7 @@ public class AuthorServiceImpl implements AuthorService{
         return author;
     }
 
+    @Retry(name = "throwingException")
     @Override
     public void save(Author author) {
         authorRepository.save(author);
