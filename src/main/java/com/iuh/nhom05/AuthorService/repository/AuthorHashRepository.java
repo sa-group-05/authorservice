@@ -36,6 +36,6 @@ public class AuthorHashRepository {
     }
 
     public void deleteById(Integer id) {
-        hashOperations.delete(KEY, findById(id));
+        hashOperations.delete(KEY, (Object) id);
     }
 }

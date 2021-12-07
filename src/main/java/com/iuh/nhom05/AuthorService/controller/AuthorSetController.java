@@ -24,18 +24,8 @@ public class AuthorSetController {
         return authorSetRepository.findAll();
     }
 
-//    @GetMapping("/{id}")
-//    public Author getAuthorById(@PathVariable("id") Integer id) {
-//        return authorSetRepository.findById(id);
-//    }
-
     @PutMapping
     public void update(@RequestBody Author author) {
         authorSetRepository.update(author);
     }
-
-//    @DeleteMapping("/{id}")
-//    public void deleteById(@PathVariable("id") Integer id) {
-//        authorSetRepository.deleteById(id);
-//    }
 }
