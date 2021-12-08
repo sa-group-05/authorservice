@@ -8,10 +8,12 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
 @SpringBootApplication
+@EnableSwagger2
 public class AuthorServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AuthorServiceApplication.class, args);
@@ -34,9 +36,9 @@ public class AuthorServiceApplication {
 				"APIs for Author Service",
 				"1.0",
 				"Free to use",
-				new springfox.documentation.service.Contact("Nhóm 05", "fit.iuh.edu.vn", "a@b.com"),
+				new springfox.documentation.service.Contact("Nhóm 05", "http://fit.iuh.edu.vn/home.html", "a@b.com"),
 				"API License",
-				"fit.iuh.edu.vn",
+				"http://fit.iuh.edu.vn/home.html",
 				Collections.emptyList());
 	}
 }
