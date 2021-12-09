@@ -1,5 +1,9 @@
 package com.iuh.nhom05.AuthorService;
 
+import com.iuh.nhom05.AuthorService.entities.User;
+import com.iuh.nhom05.AuthorService.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +18,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @SpringBootApplication
 @EnableSwagger2
-public class AuthorServiceApplication {
+public class AuthorServiceApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(AuthorServiceApplication.class, args);
 	}
@@ -31,6 +37,9 @@ public class AuthorServiceApplication {
 		RedisTemplate redisTemplate = new RedisTemplate();
 		redisTemplate.setConnectionFactory(jedisConnectionFactory());
 		return redisTemplate;
+    }
+
+
 	public Docket swaggerConfiguration() {
 		// Return a prepared Docket instance
 		return new Docket(DocumentationType.SWAGGER_2)
@@ -51,5 +60,21 @@ public class AuthorServiceApplication {
 				"API License",
 				"http://fit.iuh.edu.vn/home.html",
 				Collections.emptyList());
+    }
+    
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
+	@Override
+	public void run(String... args) throws Exception {
+		//When app run, user will be saved
+		User user = User.builder()
+				.username("someone")
+				.password(passwordEncoder.encode("password"))
+				.build();
+
+		userRepository.save(user);
 	}
 }
