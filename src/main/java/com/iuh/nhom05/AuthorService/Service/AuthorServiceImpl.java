@@ -2,7 +2,11 @@ package com.iuh.nhom05.AuthorService.Service;
 
 import com.iuh.nhom05.AuthorService.entities.Author;
 import com.iuh.nhom05.AuthorService.repository.AuthorRepository;
+<<<<<<< HEAD
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+=======
+import io.github.resilience4j.retry.annotation.Retry;
+>>>>>>> retry
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,7 @@ public class AuthorServiceImpl implements AuthorService{
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Retry(name = "basic")
     @Override
     public List<Author> findAll() {
         return authorRepository.findAll();
@@ -30,7 +35,11 @@ public class AuthorServiceImpl implements AuthorService{
         return author;
     }
 
+<<<<<<< HEAD
     @RateLimiter(name = "timeout")
+=======
+    @Retry(name = "throwingException")
+>>>>>>> retry
     @Override
     public void save(Author author) {
         authorRepository.save(author);
