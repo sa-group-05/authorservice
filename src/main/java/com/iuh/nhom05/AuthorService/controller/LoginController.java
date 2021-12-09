@@ -4,6 +4,7 @@ import com.iuh.nhom05.AuthorService.entities.User;
 import com.iuh.nhom05.AuthorService.jwt.JWTProvider;
 import com.iuh.nhom05.AuthorService.repository.UserRepository;
 import com.iuh.nhom05.AuthorService.user.MyUserDetail;
+import com.iuh.nhom05.AuthorService.vo.ResponseJwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +24,11 @@ public class LoginController {
     PasswordEncoder passwordEncoder;
 
     @PostMapping("")
-    public String login(@RequestBody User user){
+    public ResponseJwt login(@RequestBody User user){
         User databaseUser = userRepository.findUserByUsername(user.getUsername());
 
         if(passwordEncoder.matches(user.getPassword(), databaseUser.getPassword())) {
-            return jwtProvider.generateToken(new MyUserDetail(databaseUser));
+            return new ResponseJwt(jwtProvider.generateToken(new MyUserDetail(databaseUser)));
         }
 
         return null;
